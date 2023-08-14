@@ -10,7 +10,6 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
   },
 
   received(data) {
-    // Called when there's incoming data on the websocket for this channel
     const messages = document.getElementById('messages');
     messages.insertAdjacentHTML('beforeend', data['message']);
   },
