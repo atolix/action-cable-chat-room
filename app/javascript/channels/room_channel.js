@@ -15,16 +15,27 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
     messages.insertAdjacentHTML('beforeend', data['message']);
   },
 
-  speak: function(message) {
-    return this.perform('speak', {message: message})
+  speak: function(data) {
+    return this.perform('speak', data)
   }
 });
 
 window.document.onkeydown = function(event) {
-  if(event.key == 'Enter') {
-    console.log(event.target.value);
-    appRoom.speak(event.target.value);
-    event.target.value = '';
+  if(event.key == 'Enter' && event.srcElement.parentElement.attributes['data-behavior'].value == 'room_speaker') {
+    const roomSlug = document.getElementById('room-slug').value;
+    const messageContent = document.getElementById('message-content');
+    const messageName = document.getElementById('message-name');
+
+    const message = {
+      room_slug: roomSlug,
+      content: messageContent.value,
+      name: messageName.value
+    };
+
+    messageContent.value = '';
+    messageName.value = '';
+
+    appRoom.speak(message);
     event.preventDefault();
   }
 }
