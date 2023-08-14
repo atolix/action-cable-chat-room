@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_814_095_634) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_133237) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'messages', force: :cascade do |t|
-    t.text 'content', null: false
-    t.string 'name', default: 'Anonymous'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+  create_table "messages", force: :cascade do |t|
+    t.text "content", null: false
+    t.string "name", default: "Anonymous"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "name", default: "Anonymous"
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
